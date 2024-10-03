@@ -1,0 +1,96 @@
+.login-form {
+  padding: 20px;
+  border-radius: 10px;
+}
+.login-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-logo img {
+  width: 70px;
+  margin-bottom: 20px;
+}
+.login-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.login-subtitle {
+  font-size: 16px;
+  color: #6c757d;
+  margin-bottom: 30px;
+}
+.banner {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+}
+.banner h1 {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 30px;
+}
+.banner .balance-card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  color: #000;
+  text-align: center;
+}
+.balance-card .balance-amount {
+  font-size: 36px;
+  font-weight: 700;
+}
+.switchBtn{
+  background-color: transparent;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+}
+.returnBtn{
+  position: absolute;
+  background: none;
+  border: none;
+  color: gray;
+  text-decoration: underline;
+}
+.returnBtn i{
+  color: gray;
+}
+.profile_pic svg{
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  color: gray;
+}
+.profile_pic{
+  display: flex;
+  flex-direction: column;
+  border: 3px dotted gray;
+  width: 12em;
+  height: 12em;
+  cursor: pointer;
+}
+.profile_pic p{
+  color: gray;
+  font-size: 1px;
+
+}
+span{
+  font-size: 1%;
+}
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .banner h1 {
+    font-size: 24px; /* Adjust font size for smaller screens */
+  }
+  .login-title {
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+}

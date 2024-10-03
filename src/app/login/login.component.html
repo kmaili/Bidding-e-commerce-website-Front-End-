@@ -1,0 +1,107 @@
+<div class="container">
+  <button *ngIf="page=='signup'" (click)="switchPage()" class="m-2 returnBtn"><i class="bi bi-chevron-left me-2"></i>Login</button>
+  <div class="row">
+    <!-- Left Side: Login Form -->
+    <div class="col-md-6 login-left">
+      <div class="login-form">
+        <div class="login-logo text-center">
+          <img src="assets/mini-logo.png" alt="Logo"> <!-- Add your logo here -->
+        </div>
+        <h2 class="login-title text-center">{{page=='login' ? 'Connect to your account':'Let\'s create you account'}}</h2>
+        <p *ngIf="page=='login'" class="login-subtitle text-center">If you dont have one - Let's <input (click)="switchPage()" class="switchBtn" type="button" value="create your account"/></p>
+
+        <form [formGroup]="loginForm" *ngIf="page=='login'" (ngSubmit)="submit()">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" name="pwd">
+          </div>
+          <div class="d-flex justify-content-between">
+            <div></div>
+            <a href="#" class="text-muted">Forgot?</a>
+          </div>
+          <button type="submit" class="btn btn-dark w-50 mt-3 float-end">Connect</button>
+        </form>
+      </div>
+    </div>
+    <img *ngIf="page=='login'" class="col-md-6 banner" src="assets/home_image.png"/>
+  <div><div>
+        <form [formGroup]="signupForm" *ngIf="page=='signup'" (ngSubmit)="submit()" novalidate class="row">
+          <div class="col-md-6">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="fname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="fname" name="fname" formControlName="first_name">
+                <span class="text-danger" *ngIf="getControlCondition(signupForm.controls['first_name'])">invalid first name</span>
+              </div>
+              <div class="col-md-6">
+                <label for="lname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lname" name="lname" formControlName="last_name">
+                <span class="text-danger" *ngIf="getControlCondition(signupForm.controls['last_name'])">invalid last name</span>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="uname" formControlName="username">
+                <span class="text-danger" *ngIf="getControlCondition(signupForm.controls['username'])">invalid username</span>
+              </div>
+              <div class="col-md-6">
+                <label for="signupemail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="signupemail" name="signupemail" formControlName="email">
+                <span class="text-danger" *ngIf="getControlCondition(signupForm.controls['email'])">invalid mail</span>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="pwd" class="form-label">Password</label>
+                <input type="password" class="form-control" id="pwd" name="pwd" formControlName="password">
+                <span class="text-danger" *ngIf="getControlCondition(signupForm.controls['password'])">invalid password</span>
+              </div>
+              <div class="col-md-6">
+                <label for="cpwd" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="cpwd" name="cpwd" formControlName="cpassword">
+                <span class="text-danger" *ngIf="getControlCondition(signupForm.controls['cpassword'])">password not matches</span>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-md-6">
+            <div class="row align-content-center">
+              <div *ngIf="page=='signup'" class="col-md-6">
+                <label for="birth" class="form-label">Birth</label>
+                <input type="date" class="form-control" id="birth" name="birth" formControlName="birth">
+                <span class="text-danger" *ngIf="getControlCondition(signupForm.controls['birth'])">birth invalid</span>
+              </div>
+              <div *ngIf="page=='signup'" class="col-md-6">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" ngForm="sign_form" formControlName="phone"/>
+                <span class="text-danger" *ngIf="getControlCondition(signupForm.controls['phone'])">phone number invalid</span>
+              </div>
+              <input type="file" #fileInput style="display: none;" (change)="selectImage($event)" formControlName="profile_image">
+              <div *ngIf="page=='signup' && !profile_pic_url" class="m-auto mt-3 d-flex flex-column profile_pic p-2" (click)="fileInput.click()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image-alt" viewBox="0 0 16 16">
+                  <path d="M7 2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0m4.225 4.053a.5.5 0 0 0-.577.093l-3.71 4.71-2.66-2.772a.5.5 0 0 0-.63.062L.002 13v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4.5z"/>
+                </svg>
+                <p class="m-auto mt-2">Choose a profile picture</p>
+              </div>
+              <span class="text-danger text-center" *ngIf="page=='signup' && !profile_pic_url && getControlCondition(signupForm.controls['profile_image'], true)">profile image required</span>
+              <img *ngIf="profile_pic_url" [src]="profile_pic_url" class="m-auto mt-5 d-flex flex-column profile_pic p-1" (click)="fileInput.click()"/>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-dark w-25 ms-1">Submit</button>
+        </form>
+      </div>
+    </div>
+
+
+
+
+      </div>
+  </div>

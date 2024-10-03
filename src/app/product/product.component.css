@@ -1,0 +1,31 @@
+.add-image{
+  background-color: lightgray;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+.remove-img{
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: red;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.remove-img:hover {
+  transform: scale(1.5);
+}
+input:focus, select:focus , textarea:focus{
+  box-shadow: none;
+  border-color: gray;
+}

@@ -1,0 +1,100 @@
+.logo{
+  width: 20%;
+}
+.menu a{
+  font-size: 14px;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  color: gray;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
+  align-content: center;
+  border: none;
+}
+.menu a:hover{
+  transform: scale(1.1);
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  padding: 2px 5px;
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 300px; /* Default max width for larger screens */
+  margin: auto; /* Center search bar horizontally */
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex: 1;
+  background-color: transparent;
+  padding-left: 10px;
+}
+
+.search-bar i {
+  font-size: 1.2em;
+  color: #aaa;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}
+
+
+.login-btn{
+  color: gray;
+  border: none;
+  transition: transform 0.3s ease;
+}
+.login-btn:hover{
+  transform: scale(1.1);
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .search-bar {
+    max-width: 200px; /* Smaller width for tablets */
+  }
+  .logo{
+    width: 80%;
+  }
+}
+.profile_avatar{
+  border-radius: 50%;
+  border: 1px solid gray;
+  height: 30px;
+  width: 30px;
+  justify-content: center;
+  background-color: gray;
+  color: white;
+  cursor: pointer;
+}
+.profile_avatar_dropdown_menu{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.dropdown-item {
+  transition: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  cursor: pointer;
+}
+.dropdown-menu{
+  width: 17rem;
+}
+.dropdown-item:active{
+  background-color: lightgray;
+}
+@media (max-width: 480px) {
+  .search-bar {
+    max-width: 150px; /* Smaller width for mobile devices */
+  }
+  .logo {
+    width: 80%;
+  }
+  .search-bar i {
+    font-size: 1em; /* Reduce icon size on smaller screens */
+  }
+}

@@ -1,0 +1,41 @@
+<div class="menu justify-content-center d-flex navbar">
+    <img src="assets/logo.png" class="logo m-2"/>
+    <div class="col-md-4 m-auto">
+      <a href="#" class="btn">home</a>
+      <a href="#" class="btn">products</a>
+      <a href="#" class="btn">about us</a>
+      <a href="#" class="btn">contact us</a>
+    </div>
+    <div class="col-md-3 float-end me-1">
+      <div class="search-bar">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search here">
+      </div>
+    </div>
+    <div class="col-md-1 float-end me-5 dropdown">
+        <div *ngIf="(isLoggedIn | async)" class="profile_avatar d-flex flex-row float-end me-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" [ngStyle]="getProfilePicBgStyle()">
+          {{(user | async)?.profile_image ?"" : (user | async)?.username[0]}}
+        </div>
+      <ul class="dropdown-menu dropdown-menu-md-end p-3" aria-labelledby="dropdownMenuButton">
+        <li class="mb-4">
+          <div class="d-flex flex-row justify-content-center align-items-center">
+            <div class="profile_avatar_dropdown_menu ms-3" [ngStyle]="getProfilePicBgStyle()">
+              {{(user | async)?.profile_image ?"" : (user | async)?.username[0]}}
+            </div>
+            <h6 class="ms-3">
+              <span class="fw-bold text-secondary-emphasis">{{(user | async)?.first_name}} {{(user | async)?.last_name}}</span>
+              <br/>
+              <span class="text-secondary">Call: +216 {{(user | async)?.phone}}</span>
+            </h6>
+          </div>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a routerLink="/profile" class="dropdown-item"><i class="bi bi-person-circle me-2"></i>View Profile</a></li>
+        <li><a class="dropdown-item"><i class="bi bi-gear me-2"></i>Settings</a></li>
+        <li><a class="dropdown-item"><i class="bi bi-translate me-2"></i>Language</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" (click)="logout()"><i class="bi bi-door-closed me-2"></i>Logout</a></li>
+      </ul>
+      <button  *ngIf="!(isLoggedIn | async)" (click)="openLoginDialog()" class="btn login-btn"><i class="bi bi-person me-1"></i>Login</button>
+    </div>
+  </div>

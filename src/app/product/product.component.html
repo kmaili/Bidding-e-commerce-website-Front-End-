@@ -1,0 +1,68 @@
+<div class="container mt-5">
+  <div class="card shadow-lg border-0">
+    <div class="card-body p-4">
+      <h2 class="text-center text-muted mb-4">Add New Product</h2>
+
+      <!-- Reactive form declaration -->
+      <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+        <!-- Product Name -->
+        <div class="mb-3">
+          <label for="productName" class="form-label">Product Name</label>
+          <input type="text" class="form-control" id="productName" formControlName="product_name" required>
+        </div>
+
+        <!-- Product Description -->
+        <div class="mb-3">
+          <label for="productDescription" class="form-label">Product Description</label>
+          <textarea class="form-control" id="productDescription" rows="4" formControlName="product_description" required></textarea>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+          <label for="price" class="form-label">Initial Price</label>
+          <input type="number" class="form-control" id="price" formControlName="product_actual_price" required>
+        </div>
+
+        <!-- Category -->
+        <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select (change)="onCategoryChange($event)" class="form-select" id="category" formControlName="product_category" required>
+            <option selected disabled value="">Choose a category</option>
+            <option>Electronics</option>
+            <option>Fashion</option>
+            <option>Home Appliances</option>
+            <option>Sports</option>
+            <option>Others</option>
+          </select>
+          <input class="form-control w-25 text-center mt-1" id="new-cat" placeholder="New category" formControlName="newCategory" [hidden]="newCatHidden" #newCat>
+        </div>
+
+        <!-- Stock -->
+        <div class="mb-3">
+          <label for="stock" class="form-label">Stock Quantity</label>
+          <input type="number" class="form-control" id="stock" formControlName="stock" required>
+        </div>
+
+        <!-- Product Image -->
+        <div class="mb-3">
+          <label class="form-label">Product Image</label>
+          <ul class="list-group list-group-horizontal overflow-scroll">
+            <li class="list-group-item me-1 d-flex" *ngFor="let i of images_urls; let fileIndex=index;">
+              <img [src]="images_urls[fileIndex]" width="100" height="100"/>
+              <i class="bi bi-x-lg remove-img" (click)="removeProduct(fileIndex)"></i>
+            </li>
+            <div class="list-group-item add-image" (click)="fileInput.click()">
+              <h1>+</h1>
+            </div>
+          </ul>
+          <input type="file" #fileInput style="display: none;" (change)="filesService.addImage($event, images_urls, selectedFiles)">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-secondary">{{mode === 'update'?'Update':'Add'}} Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

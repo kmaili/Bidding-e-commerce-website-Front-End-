@@ -1,0 +1,215 @@
+<div class="d-flex mt-5 w-100 container profile-container p-5 align-items-center flex-column flex-md-row">
+  <div class="float-start d-flex h-50 p-2 justify-content-center align-items-center" (mouseleave)="closeOverlay()" (mouseenter)="openOverlay()">
+    <img [ngStyle]="getProfilePicBgStyle()" class="profile_pic" />
+    <div class="overlay m-auto" *ngIf="isVisible" (click)="fileInput.click()">
+      <div class="overlay-content">
+        <button class="btn bg-transparent text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+            <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z"/>
+            <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+          </svg>
+        </button>
+        <input type="file" #fileInput style="display: none;" (change)="selectImage($event)">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+
+  <div class="float-end flex-column d-flex align-items-end justify-content-center w-100">
+    <div class="row w-100">
+      <div class="col-md-6">
+        <label class="form-label" for="fname">First Name</label>
+        <span class="d-flex">
+          <input
+            id="fname"
+            [(ngModel)]="userModel.first_name"
+            class="form-control"
+            [disabled]="checkEditing('first_name')"
+            (input)="updateValue('first_name', $event)"
+            (blur)="setEditing(undefined, 'first_name')" />
+          <label *ngIf="editingField !== 'first_name'; else check" class="btn" for="fname" (click)="setEditing('first_name')">
+            <i class="bi bi-pencil-square"></i>
+          </label>
+          <ng-template #check>
+            <label class="btn" (click)="setEditing(undefined)">
+              <i class="bi bi-check-lg"></i>
+            </label>
+          </ng-template>
+        </span>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" for="lname">Last Name</label>
+        <span class="d-flex">
+          <input
+            id="lname"
+            [value]="userModel.last_name"
+            class="form-control"
+            [disabled]="checkEditing('last_name')"
+            (input)="updateValue('last_name', $event)"
+            (blur)="setEditing(undefined, 'last_name')" />
+          <label *ngIf="editingField !== 'last_name'; else check" class="btn" for="lname" (click)="setEditing('last_name')">
+            <i class="bi bi-pencil-square"></i>
+          </label>
+          <ng-template #check>
+            <label class="btn" (click)="setEditing(undefined)">
+              <i class="bi bi-check-lg"></i>
+            </label>
+          </ng-template>
+        </span>
+      </div>
+    </div>
+
+    <div class="row mt-1 w-100">
+      <div class="col-md-6">
+        <label class="form-label" for="email">Email</label>
+        <span class="d-flex">
+          <input
+            id="email"
+            [value]="userModel.email"
+            class="form-control"
+            [disabled]="checkEditing('email')"
+            (input)="updateValue('email', $event)"
+            (blur)="setEditing(undefined, 'email')" />
+          <label *ngIf="editingField !== 'email'; else check" class="btn" for="email" (click)="setEditing('email')">
+            <i class="bi bi-pencil-square"></i>
+          </label>
+          <ng-template #check>
+            <label class="btn" (click)="setEditing(undefined)">
+              <i class="bi bi-check-lg"></i>
+            </label>
+          </ng-template>
+        </span>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" for="uname">Username</label>
+        <span class="d-flex">
+          <input
+            id="uname"
+            [value]="userModel.username"
+            class="form-control"
+            [disabled]="checkEditing('username')"
+            (input)="updateValue('username', $event)"
+            (blur)="setEditing(undefined, 'username')" />
+          <label *ngIf="editingField !== 'username'; else check" class="btn" for="uname" (click)="setEditing('username')">
+            <i class="bi bi-pencil-square"></i>
+          </label>
+          <ng-template #check>
+            <label class="btn" (click)="setEditing(undefined)">
+              <i class="bi bi-check-lg"></i>
+            </label>
+          </ng-template>
+        </span>
+      </div>
+    </div>
+
+    <div class="row mt-1 w-100">
+      <div class="col-md-6">
+        <label class="form-label" for="phone">Phone</label>
+        <span class="d-flex">
+          <input
+            id="phone"
+            type="tel"
+            [value]="userModel.phone"
+            class="form-control"
+            [disabled]="checkEditing('phone')"
+            (input)="updateValue('phone', $event)"
+            (blur)="setEditing(undefined, 'phone')" />
+          <label *ngIf="editingField !== 'phone'; else check" class="btn" for="phone" (click)="setEditing('phone')">
+            <i class="bi bi-pencil-square"></i>
+          </label>
+          <ng-template #check>
+            <label class="btn" (click)="setEditing(undefined)">
+              <i class="bi bi-check-lg"></i>
+            </label>
+          </ng-template>
+        </span>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" for="birth">Birth</label>
+        <span class="d-flex">
+          <input
+            id="birth"
+            type="date"
+            [value]="userModel.birth"
+            class="form-control"
+            [disabled]="checkEditing('birth')"
+            (input)="updateValue('birth', $event)"
+            (blur)="setEditing(undefined, 'birth')" />
+          <label *ngIf="editingField !== 'birth'; else check" class="btn" for="birth" (click)="setEditing('birth')">
+            <i class="bi bi-pencil-square"></i>
+          </label>
+          <ng-template #check>
+            <label class="btn" (click)="setEditing(undefined)">
+              <i class="bi bi-check-lg"></i>
+            </label>
+          </ng-template>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 class="products-title container mt-3">Products</h2>
+
+<div class="container pages mt-3">
+  <ul class="list-group list-group-horizontal gap-2">
+    <li class="list-group-item" *ngIf="selectedPage-2 > 1" (click)="selectedPage = 1; generatePageRange();loadUserProducts();" >{{1}}</li>
+    <h4 class="text-muted" *ngIf="selectedPage-2 > 1">. . .</h4>
+    <li [style]="'background-color:'+ (selectedPage == pageIndex ? 'gray;color:white;':'white;color:gray;')" class="list-group-item" *ngFor="let pageIndex of pageRange" (click)="selectedPage = pageIndex; generatePageRange();loadUserProducts();">{{pageIndex}}</li>
+    <h4 class="text-muted" *ngIf="selectedPage+2 < totalPages">. . .</h4>
+    <li class="list-group-item" *ngIf="selectedPage+2 < totalPages" (click)="selectedPage = totalPages; generatePageRange();loadUserProducts();" >{{totalPages}}</li>
+  </ul>
+</div>
+<div class="container mt-3 clearfix">
+  <form class="search-bar float-end" >
+    <i class="bi bi-search"></i>
+    <input type="text" placeholder="Search here" [formControl]="searchController">
+  </form>
+  <div class="sorting float-end">
+    <i class="bi-funnel me-2"></i>
+    <select (change)="reloadProductsWithOrder()" class="form-select" aria-label="Sort By" #sortBy>
+      <option selected value="created_at" disabled>Sort By</option>
+      <option value="product_name">Name</option>
+      <option value="created_at">Creation Date</option>
+      <option>Bidding Price</option>
+      <option>Bidders Count</option>
+    </select>
+    <i [class]="'rounded bi bi-arrow-up ms-1 ' + (sortOrder === 'asc' ? 'bg-secondary' : '')" (click)="sortOrder='asc';reloadProductsWithOrder()"></i>
+    <i [class]="'rounded bi bi-arrow-down me-3 ' + (sortOrder === 'desc' ? 'bg-secondary' : '')" (click)="sortOrder='desc';reloadProductsWithOrder()"></i>
+  </div>
+</div>
+<div class="container mt-3 p-1">
+  <div class="grid-container" *ngIf="pageProducts.length != 0">
+    <div *ngFor="let item of pageProducts" class="grid-item">
+      <div class="product-card">
+        <img src="assets/home_image.png" class="product-img" alt="Product Image">
+        <h5 class="mt-3">{{item.product_name}}</h5>
+        <p class="text-muted fade-text">here is a short description of my product Short product description goes here. i want to have fun with that product of course how can i did it</p>
+        <div class="d-flex justify-content-between">
+          <div class="curr-bid bg-secondary text-white p-1 d-flex justify-content-center align-items-center flex-column">
+            <p class="mb-0 text-info fw-bold">Current Bid</p>
+            <h6>{{item.product_actual_price}} DT</h6>
+          </div>
+          <div class="left-time curr-bid bg-secondary text-white p-1 d-flex justify-content-center align-items-center flex-column">
+            <p class="mb-0 text-info fw-bold">Time Left:</p>
+            <p class="countdown">2h 35m 20s</p>
+          </div>
+        </div>
+        <button (click)="navigateToEditPage(item)" class="btn btn-secondary m-auto w-100 mt-3">Edit Product</button>
+      </div>
+
+    </div>
+  </div>
+  <h1 *ngIf="pageProducts.length == 0">No Product Found</h1>
+</div>
+<div class="container pages mt-3">
+  <ul class="list-group list-group-horizontal gap-2">
+    <li class="list-group-item" *ngIf="selectedPage-2 > 1" (click)="selectedPage = 1; generatePageRange();loadUserProducts();" >{{1}}</li>
+    <h4 class="text-muted" *ngIf="selectedPage-2 > 1">. . .</h4>
+    <li [style]="'background-color:'+ (selectedPage == pageIndex ? 'gray;color:white;':'white;color:gray;')" class="list-group-item" *ngFor="let pageIndex of pageRange" (click)="selectedPage = pageIndex; generatePageRange();loadUserProducts();">{{pageIndex}}</li>
+    <h4 class="text-muted" *ngIf="selectedPage+2 < totalPages">. . .</h4>
+    <li class="list-group-item" *ngIf="selectedPage+2 < totalPages" (click)="selectedPage = totalPages; generatePageRange();loadUserProducts();" >{{totalPages}}</li>
+  </ul>
+</div>
